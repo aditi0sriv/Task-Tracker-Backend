@@ -19,13 +19,6 @@ app.use(express.json()); // parsing incoming JSON data body requests
 app.use(express.urlencoded({ extended : false })); // parsing and reading form data
 app.use(cors());
 
-app.use(cors({
-    origin: '*', // Allow all origins temporarily
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
-app.options('*', cors()); 
 
 app.use(useErrorHandler);
 app.use('/', routes);
