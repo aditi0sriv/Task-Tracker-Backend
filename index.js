@@ -16,13 +16,20 @@ const app = express();
 
 connectToMongoDB(); // connecting to mongo database
 app.use(express.json()); // parsing incoming JSON data body requests
-app.use(express.urlencoded({ extended : false })); // parsing and reading form data
+app.use(express.urlencoded({ extended: false })); // parsing and reading form data
 app.use(cors());
 
 
 app.use(useErrorHandler);
 app.use('/', routes);
- 
+
+const corsOptions = {
+    origin: 'https://task-tracker-5bhi.vercel.app', // allow your frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
